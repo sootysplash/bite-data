@@ -12,28 +12,35 @@ public class TypeObject {
 
     private TypeObject(Type type, Object object) {
         Objects.requireNonNull(type);
-        Objects.requireNonNull(object);
         this.type = type;
         this.object = object;
     }
 
     public static TypeObject of(Number number) {
+        if (number == null) {
+            return of(Type.Null, null);
+        }
         if (Math.floor(number.doubleValue()) == number.doubleValue()) {
-            if (number.byteValue() == number.intValue()) {
-                return new TypeObject(Type.Byte, number.byteValue());
-            } else if (number.shortValue() == number.intValue()) {
-                return new TypeObject(Type.Short, number.shortValue());
+            if (number.byteValue() == number.longValue()) {
+                return of(Type.Byte, number.byteValue());
+            } else if (number.shortValue() == number.longValue()) {
+                return of(Type.Short, number.shortValue());
+            } else if (number.intValue() == number.longValue()) {
+                return of(Type.Integer, number.intValue());
             } else {
-                return new TypeObject(Type.Integer, number.intValue());
+                return of(Type.Long, number.longValue());
             }
         } else if (number.floatValue() == number.doubleValue()) {
-            return new TypeObject(Type.Float, number.floatValue());
+            return of(Type.Float, number.floatValue());
         } else {
-            return new TypeObject(Type.Double, number.doubleValue());
+            return of(Type.Double, number.doubleValue());
         }
     }
 
     public static TypeObject of(Type type, Object object) {
+        if (object == null) {
+            type = Type.Null;
+        }
         return new TypeObject(type, object);
     }
 
@@ -95,6 +102,9 @@ public class TypeObject {
             case Double:
                 dos.writeDouble(getDouble());
                 break;
+            case Long:
+                dos.writeLong(getLong());
+                break;
             case CharSequence:
                 CharSeq.toOutputStream(getCharSequence(), dos);
                 break;
@@ -140,6 +150,9 @@ public class TypeObject {
                 break;
             case Double:
                 object = dis.readDouble();
+                break;
+            case Long:
+                object = dis.readLong();
                 break;
             case CharSequence:
                 object = CharSeq.fromInputStream(dis);
@@ -207,6 +220,10 @@ public class TypeObject {
         return Type.isNumber(getType()) && getObject() instanceof Number;
     }
 
+    public boolean isNull() {
+        return getType() == Type.Null && getObject() == null;
+    }
+
     public byte getByte() {
         return ((Number) getObject()).byteValue();
     }
@@ -225,6 +242,10 @@ public class TypeObject {
 
     public double getDouble() {
         return ((Number) getObject()).doubleValue();
+    }
+
+    public long  getLong() {
+        return ((Number) getObject()).longValue();
     }
 
     public char getCharacter() {

@@ -18,7 +18,7 @@ public interface BiteArray extends Iterable<TypeObject>, Nestable {
         add(TypeObject.of(n));
     }
 
-    default void add(CharSequence cs) {
+    default void addCs(CharSequence cs) {
         add(TypeObject.of(Type.CharSequence, cs));
     }
 
@@ -56,7 +56,9 @@ public interface BiteArray extends Iterable<TypeObject>, Nestable {
     }
 
     static BiteArray fromBytes(byte[] data) {
-        DataInputStream is = new DataInputStream(new ByteArrayInputStream(data));
+        byte[] buffer = new byte[data.length];
+        System.arraycopy(data, 0, buffer, 0, data.length);
+        DataInputStream is = new DataInputStream(new ByteArrayInputStream(buffer));
         BiteArray biteArray = new BiteArrayImpl();
         try {
             while (is.available() > 0) {

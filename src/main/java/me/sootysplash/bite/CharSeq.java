@@ -27,6 +27,9 @@ public class CharSeq implements CharSequence {
     }
 
     public static CharSeq of(CharSequence cs) {
+        if (cs == null) {
+            return of('n', 'u', 'l', 'l');
+        }
         int[] array = cs.chars().toArray();
         int length = array.length;
         char[] chars = new char[length];

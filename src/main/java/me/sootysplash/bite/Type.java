@@ -1,7 +1,7 @@
 package me.sootysplash.bite;
 
 public enum Type {
-    Boolean(1), Short(2), Integer(3), Float(4), Double(5), Byte(6), CharSequence(7), Nest(9), Array(10)
+    Boolean(1), Short(2), Integer(3), Float(4), Double(5), Byte(6), Long(7), CharSequence(8), Nest(9), Array(10), Null(11)
     ;
     public final byte code;
     private static final Type[] numbers;

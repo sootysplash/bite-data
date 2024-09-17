@@ -25,7 +25,7 @@ public interface BiteMap extends Nestable {
         add(key, (byte) c);
     }
 
-    default void add(CharSequence key, CharSequence cs) {
+    default void addCs(CharSequence key, CharSequence cs) {
         add(key, TypeObject.of(Type.CharSequence, cs));
     }
 
@@ -52,7 +52,9 @@ public interface BiteMap extends Nestable {
     }
 
     static BiteMap fromBytes(byte[] data) {
-        DataInputStream is = new DataInputStream(new ByteArrayInputStream(data));
+        byte[] buffer = new byte[data.length];
+        System.arraycopy(data, 0, buffer, 0, data.length);
+        DataInputStream is = new DataInputStream(new ByteArrayInputStream(buffer));
         BiteMap biteMap = new BiteMapImpl();
         try {
             while (is.available() > 0) {
