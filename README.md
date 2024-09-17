@@ -6,6 +6,8 @@ There are two main objects for storing data, the BiteMap (CharSequence key linke
 
 BiteMaps and BiteArrays can be nested inside each other, allowing for storage of complex objects with ease
 
+Since data is stored as bytes and not as a string (cough gson), the only limit on how much data you can store is the Java heap
+
 ### Key Optimisations
 
 - BiteMaps store every entry in [CharSequenceBytes, KeyByteForObject, ObjectBytes] form, BiteArrays store every object in [KeyByteForObject, ObjectBytes] form
