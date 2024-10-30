@@ -25,7 +25,7 @@ public interface BiteMap extends Nestable {
         add(key, (byte) c);
     }
 
-    default void addCs(CharSequence key, CharSequence cs) {
+    default void add(CharSequence key, CharSequence cs) {
         add(key, TypeObject.of(Type.CharSequence, cs));
     }
 

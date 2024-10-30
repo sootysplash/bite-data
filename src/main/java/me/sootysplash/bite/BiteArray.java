@@ -18,7 +18,7 @@ public interface BiteArray extends Iterable<TypeObject>, Nestable {
         add(TypeObject.of(n));
     }
 
-    default void addCs(CharSequence cs) {
+    default void add(CharSequence cs) {
         add(TypeObject.of(Type.CharSequence, cs));
     }
 

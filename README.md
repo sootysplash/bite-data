@@ -37,7 +37,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BiteMap map = BiteMap.newInstance();
         map.add("value behind key", 25);
-        map.addCs(null, null);
+        map.add(null, (Number) null);
 
         // "true"
         System.out.println(map.get(null).isNull());
@@ -46,12 +46,12 @@ public class Main {
 
         map.add("array-value", array);
 
-        array.addCs("sequence");
-        array.addCs("of");
-        array.addCs("words");
-        array.addCs("in");
-        array.addCs("order");
-        array.addCs(null);
+        array.add("sequence");
+        array.add("of");
+        array.add("words");
+        array.add("in");
+        array.add("order");
+        array.add((Number) null);
         array.add(false);
 
         // this byte array can be stored to and loaded from anywhere, not just files
