@@ -265,11 +265,12 @@ public class TypeObject {
         return Objects.hash(getType(), getObject());
     }
 
+    public String toLongString() {
+        return getType().name().toLowerCase() + ":" + getObject();
+    }
+
     @Override
     public String toString() {
-        return "TypeObject{" +
-                "type=" + getType() +
-                ", object=" + getObject() +
-                '}';
+        return String.valueOf(getObject());
     }
 }

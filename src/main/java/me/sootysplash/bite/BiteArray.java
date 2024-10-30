@@ -23,7 +23,7 @@ public interface BiteArray extends Iterable<TypeObject>, Nestable {
     }
 
     default void add(BiteArray array) {
-        if (this.equals(array)) {
+        if (this == array) {
             throw new IllegalArgumentException("Cannot add self to self!");
         }
         add(TypeObject.of(Type.Array, array));

@@ -7,7 +7,7 @@ import java.util.Set;
 public interface BiteMap extends Nestable {
 
     default void add(CharSequence key, BiteMap toNest) {
-        if (this.equals(toNest)) {
+        if (this == toNest) {
             throw new IllegalArgumentException("Cannot add self to self!");
         }
         add(key, TypeObject.of(Type.Nest, toNest));
